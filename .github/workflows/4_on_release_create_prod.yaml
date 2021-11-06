@@ -1,15 +1,15 @@
 name: Deploy the code to K8s production environment when a new release is created
 
 on:
-  push:
-    tags:
-    - '**'
+  release:
+    types:
+    - created
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   QUAY_PULL_SECRET: ${{ secrets.QUAY_PULL_SECRET }}
   OPENSHIFT_SERVER_URL: ${{ secrets.OPENSHIFT_SERVER_URL }}
-  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_PROD_TOKEN }}
   OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_PROD_NAMESPACE }}
   REGISTRY_URL: "quay.io" # use "docker.io" for docker hub 
   ENV: "dev"
