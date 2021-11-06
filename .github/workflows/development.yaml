@@ -11,7 +11,7 @@ env:
   OPENSHIFT_SERVER_URL: ${{ secrets.OPENSHIFT_SERVER_URL }}
   OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
   OPENSHIFT_NAMESPACE: ${{ secrets.OPENSHIFT_DEV_NAMESPACE }}
-  REGISTRY_URL: "quay.io" # use "docker.io" for docker hub
+  REGISTRY_URL: "quay.io" # use "docker.io" for docker hub 
   ENV: "dev"
 
 jobs:
