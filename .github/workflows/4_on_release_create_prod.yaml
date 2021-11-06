@@ -1,9 +1,9 @@
 name: Deploy the code to K8s production environment when a new release is created
 
 on:
-  push:
-    tags:
-    - '**'
+  release:
+    types:
+    - created
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
