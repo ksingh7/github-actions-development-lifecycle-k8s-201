@@ -3,7 +3,7 @@ name: Deploy the code coming from Pull Request (before PR merge)
 on:
   pull_request:
     branches:
-    - development
+    - main
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
