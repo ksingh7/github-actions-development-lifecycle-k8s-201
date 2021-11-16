@@ -52,11 +52,3 @@ jobs:
 
       - name: Deploy to openshift
         run: oc apply -f deploy-to-openshift.yaml
-
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            This comment was written by a bot!
-          reactions: rocket
