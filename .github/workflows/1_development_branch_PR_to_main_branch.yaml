@@ -57,7 +57,7 @@ jobs:
         run: echo ::set-output name=route_name::$(oc get route gha-python-app -o jsonpath='{.spec.host}')
         id: openshift_route_name
 
-      - name: Create comment
+      - name: Add a comment to PR
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.pull_request.number }}

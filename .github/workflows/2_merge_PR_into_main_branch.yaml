@@ -61,14 +61,14 @@ jobs:
         id: Get_PR_Number
         with:
           # Can be "open", "closed", or "all".  Defaults to "open".
-          state: open
+          state: closed
 
       - run: echo "Your PR is ${PR}"
         if: success() && steps.findPr.outputs.number
         env:
           PR: ${{ steps.Get_PR_Number.outputs.pr }}
 
-      - name: Create comment
+      - name: Add a comment to PR
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ env.PR }}
