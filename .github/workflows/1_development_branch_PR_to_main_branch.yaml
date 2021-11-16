@@ -62,5 +62,5 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            Deployment has been completed, here is the link to deployed endpoint https://${{ steps.openshift_route_name.outputs.route_name}}
+            Deployment has been completed, here is the link to deployed endpoint http://${{ steps.openshift_route_name.outputs.route_name}}
           reactions: rocket

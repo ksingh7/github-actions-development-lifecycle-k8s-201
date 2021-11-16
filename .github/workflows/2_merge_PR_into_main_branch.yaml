@@ -54,13 +54,24 @@ jobs:
         run: oc apply -f deploy-to-openshift.yaml
 
       - name: Get OpenShift Route name
-        run: oc get route gha-python-app -o jsonpath='{.spec.host}'
+        run: echo ::set-output name=route_name::$(oc get route gha-python-app -o jsonpath='{.spec.host}')
         id: openshift_route_name
+
+      - uses: jwalton/gh-find-current-pr@v1
+        id: Get_PR_Number
+        with:
+          # Can be "open", "closed", or "all".  Defaults to "open".
+          state: open
+
+      - run: echo "Your PR is ${PR}"
+        if: success() && steps.findPr.outputs.number
+        env:
+          PR: ${{ steps.Get_PR_Number.outputs.pr }}
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ github.event.pull_request.number }}
+          issue-number: ${{ env.PR }}
           body: |
-            Deployment has been completed, here is the link to deployed endpoint https://${{ steps.openshift_route_name.outputs}}
+            Deployment has been completed, here is the link to deployed endpoint http://${{ steps.openshift_route_name.outputs.route_name}}
           reactions: rocket
