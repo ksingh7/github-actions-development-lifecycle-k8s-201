@@ -63,15 +63,10 @@ jobs:
           # Can be "open", "closed", or "all".  Defaults to "open".
           state: closed
 
-      - run: echo "Your PR is ${PR}"
-        if: success() && steps.findPr.outputs.number
-        env:
-          PR: ${{ steps.Get_PR_Number.outputs.pr }}
-
       - name: Add a comment to PR
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ env.PR }}
+          issue-number: ${{ steps.Get_PR_Number.outputs.pr }}
           body: |
             Deployment has been completed, here is the link to deployed endpoint http://${{ steps.openshift_route_name.outputs.route_name}}
           reactions: rocket
