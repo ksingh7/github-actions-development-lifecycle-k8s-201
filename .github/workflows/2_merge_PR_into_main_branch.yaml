@@ -51,4 +51,16 @@ jobs:
           namespace: ${{ env.OPENSHIFT_NAMESPACE }}
 
       - name: Deploy to openshift
-        run: oc apply -f deploy-to-openshift.yaml 
+        run: oc apply -f deploy-to-openshift.yaml
+
+      - name: Get OpenShift Route name
+        run: oc get route gha-python-app -o jsonpath='{.spec.host}'
+        id: openshift_route_name
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Deployment has been completed, here is the link to deployed endpoint https://${{ steps.openshift_route_name.outputs}}
+          reactions: rocket

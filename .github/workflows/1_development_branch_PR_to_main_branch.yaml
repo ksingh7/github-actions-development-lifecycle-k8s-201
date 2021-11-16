@@ -51,4 +51,4 @@ jobs:
           namespace: ${{ env.OPENSHIFT_NAMESPACE }}
 
       - name: Deploy to openshift
-        run: oc apply -f deploy-to-openshift.yaml 
+        run: oc apply -f deploy-to-openshift.yaml
